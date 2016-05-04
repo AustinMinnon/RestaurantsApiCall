@@ -5,10 +5,12 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:layout_gravity="center"
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:id="@+id/userImageView"
-        android:src="@drawable/user1"
+        android:src="@drawable/user2"
+
         android:scaleType="centerCrop"/>
 
     <LinearLayout
@@ -19,6 +21,7 @@
         android:padding="10dp">
 
         <TextView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/userTextView"
@@ -28,6 +31,7 @@
             android:textColor="@color/colorPrimary"/>
 
         <TextView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email Address"
