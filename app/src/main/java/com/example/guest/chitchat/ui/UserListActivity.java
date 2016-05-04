@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class UserActivity extends AppCompatActivity {
+public class UserListActivity extends AppCompatActivity {
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private Query mQuery;
     private Firebase mFirebaseUserRef;

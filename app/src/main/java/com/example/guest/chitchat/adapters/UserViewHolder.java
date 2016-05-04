@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.example.guest.chitchat.R;
 import com.example.guest.chitchat.models.User;
+import com.example.guest.chitchat.ui.UserDetailActivity;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -26,16 +29,16 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         ButterKnife.bind(this, itemView);
         mContext = itemView.getContext();
         mUsers = users;
-//        itemView.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                int itemPosition = getLayoutPosition();
-//                Intent intent = new Intent(mContext, UserDetailActivity.class);
-//                intent.putExtra("position", itemPosition + "");
-//                intent.putExtra("users", Parcels.wrap(mUsers));
-//                mContext.startActivity(intent);
-//            }
-//        });
+        itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                int itemPosition = getLayoutPosition();
+                Intent intent = new Intent(mContext, UserDetailActivity.class);
+                intent.putExtra("position", itemPosition + "");
+                intent.putExtra("users", Parcels.wrap(mUsers));
+                mContext.startActivity(intent);
+            }
+        });
     }
         public void bindUser(User user){
         mEmailTextView.setText(user.getEmail());

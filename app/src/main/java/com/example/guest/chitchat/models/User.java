@@ -1,11 +1,14 @@
 package com.example.guest.chitchat.models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by Guest on 5/4/16.
  */
+@Parcel
 public class User {
-    private String name;
-    private String email;
+    String name;
+    String email;
 
     public User() {}
 

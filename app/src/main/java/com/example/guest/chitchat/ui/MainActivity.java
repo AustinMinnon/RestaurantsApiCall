@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         if (v == mContactsButton){
-            Intent intent = new Intent(MainActivity.this, UserActivity.class);
+            Intent intent = new Intent(MainActivity.this, UserListActivity.class);
             startActivity(intent);
         }
     }
