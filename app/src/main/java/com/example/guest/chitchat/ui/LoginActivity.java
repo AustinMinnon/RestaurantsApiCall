@@ -5,10 +5,12 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guest.chitchat.Constants;
 import com.example.guest.chitchat.R;
@@ -69,14 +71,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mFirebaseRef.authWithPassword(email, password, new Firebase.AuthResultHandler() {
 
             @Override
-              public void onAuthenticated(AuthData authData) {
+            public void onAuthenticated(AuthData authData) {
                 if (authData != null) {
                     String userUid = authData.getUid();
-                    mSharedPreferencesEditor.putString(Constants.KEY.UID, userUid).apply();
+                    mSharedPreferencesEditor.putString(Constants.KEY_UID, userUid).apply();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
+                    String userInfo = authData.toString();
+                    Log.d(TAG, "Currently logged in: " + userInfo);
                 }
             }
 
@@ -97,8 +101,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         showErrorToast(firebaseError.toString());
                 }
             }
+        });
 
-
-        })
+    }
+    private void showErrorToast(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
     }
 }
