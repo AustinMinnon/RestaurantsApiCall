@@ -14,9 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.epicodus.myrestaurants.Constants;
 import com.epicodus.myrestaurants.R;
+import com.epicodus.myrestaurants.models.User;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -26,13 +28,22 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    @Bind(R.id.findRestaurantsButton) Button mFindRestaurantsButton ;
-    @Bind(R.id.savedRestaurantsButton) Button mSavedRestaurantsButton;
+    public static final String TAG = MainActivity.class.getSimpleName();
     private Firebase mFirebaseRef;
+    @Bind(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
+    @Bind(R.id.savedRestaurantsButton) Button mSavedRestaurantsButton;
+    private ValueEventListener mUserRefListener;
+    private Firebase mUserRef;
+    private String mUId;
+    private SharedPreferences mSharedPreferences;
+    @Bind(R.id.welcomeTextView)TextView mWelcomeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mUId = mSharedPreferences.getString(Constants.KEY_UID, null);
+        Log.d("UID", mUId);
+        mUserRef = new Firebase(Constants.FIREBASE_URL_USERS).child(mUId);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -41,6 +52,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFindRestaurantsButton.setOnClickListener(this);
         mSavedRestaurantsButton.setOnClickListener(this);
 
+        mUserRefListener = mUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                mWelcomeTextView.setText("Welcome, " + user.getName() + ", to");
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.d(TAG, "Read failed");
+            }
+        });
     }
         @Override
         public boolean onCreateOptionsMenu (Menu menu){
