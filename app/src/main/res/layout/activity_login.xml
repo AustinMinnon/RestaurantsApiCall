@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context="com.example.guest.chitchat.ui.LoginActivity"
+=======
+    tools:context="com.epicodus.myrestaurants.ui.LoginActivity"
+>>>>>>> 55d09cf5c9d000128cc9bed79abc05349330990f
     android:background="@color/colorPrimary">
 
     <TextView
@@ -78,4 +82,8 @@
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 55d09cf5c9d000128cc9bed79abc05349330990f
 </RelativeLayout>
